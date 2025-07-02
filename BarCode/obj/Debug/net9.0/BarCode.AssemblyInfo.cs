@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BarCode")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74183c53805b59ca5f5d2ab6768605ec366b542f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+adedeba7b2923b9a9d9b0439e7c2dfab6cbffa71")]
 [assembly: System.Reflection.AssemblyProductAttribute("BarCode")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BarCode")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
