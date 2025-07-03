@@ -50,9 +50,21 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "BarCode.Slim": {
+              "target": "Package",
+              "version": "[2025.6.7, )"
+            },
             "BarCoder": {
               "target": "Package",
               "version": "[1.6.0, )"
+            },
+            "BarcodeLib": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "IronSoftware.ReaderInternals.Windows": {
+              "target": "Package",
+              "version": "[2025.6.34974, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",

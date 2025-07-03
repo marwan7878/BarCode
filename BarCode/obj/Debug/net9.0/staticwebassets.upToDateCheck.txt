@@ -1,3 +1,17 @@
+wwwroot\barcodes\0.png
+wwwroot\barcodes\10.png
+wwwroot\barcodes\12.png
+wwwroot\barcodes\13.png
+wwwroot\barcodes\14.png
+wwwroot\barcodes\15.png
+wwwroot\barcodes\16.png
+wwwroot\barcodes\17.png
+wwwroot\barcodes\24.png
+wwwroot\barcodes\3.png
+wwwroot\barcodes\4.png
+wwwroot\barcodes\5.png
+wwwroot\barcodes\6.png
+wwwroot\barcodes\7.png
 wwwroot\css\site.css
 wwwroot\favicon.ico
 wwwroot\js\site.js

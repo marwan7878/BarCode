@@ -1,4 +1,6 @@
 using BarCode.Models;
+using BarCode.Services;
+using BarCode.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -9,6 +11,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IProductServices, ProductServices>();
 
 var app = builder.Build();
 
@@ -29,7 +34,7 @@ app.MapStaticAssets();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
+    pattern: "{controller=Products}/{action=Index}/{id?}")
     .WithStaticAssets();
 
 
