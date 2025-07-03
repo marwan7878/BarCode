@@ -1,195 +1,152 @@
 ﻿using BarCode.Models;
+using BarCode.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Net.NetworkInformation;
-using System.Runtime.InteropServices;
-using ZXing;
-using ZXing.QrCode;
 
 namespace BarCode.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IProductServices _productServices;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(IProductServices productServices)
         {
-            _context = context;
+            _productServices = productServices;
         }
 
-        // GET: Products
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Products.ToListAsync());
+            try
+            {
+                var products = await _productServices.GetAllAsync();
+                return View(products);
+            }
+            catch (Exception ex)
+            {
+                // Log the error (use a logger in real app)
+                return View("Error", ex.Message);
+            }
         }
 
-        // GET: Products/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
-            {
                 return NotFound();
-            }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+            try
             {
-                return NotFound();
+                var product = await _productServices.GetByIdAsync(id.Value);
+                if (product == null) return NotFound();
+                return View(product);
             }
-
-            return View(product);
+            catch (Exception ex)
+            {
+                return View("Error", ex.Message);
+            }
         }
 
-        // GET: Products/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Barcode,BarcodeImagePath,Quantity,CreatedAt")] Product product)
+        public async Task<IActionResult> Create(Product product)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(product);
+
+            try
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                await _productServices.AddAsync(product);
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            catch (Exception ex)
+            {
+                ModelState.AddModelError(string.Empty, $"Error: {ex.Message}");
+                return View(product);
+            }
         }
 
-        // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var product = await _context.Products.FindAsync(id);
-            if (product == null)
+            try
             {
-                return NotFound();
+                var product = await _productServices.GetByIdAsync(id.Value);
+                if (product == null) return NotFound();
+                return View(product);
             }
-            return View(product);
+            catch (Exception ex)
+            {
+                return View("Error", ex.Message);
+            }
         }
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Barcode,BarcodeImagePath,Quantity,CreatedAt")] Product product)
+        public async Task<IActionResult> Edit(int id, Product product)
         {
-            if (id != product.Id)
-            {
-                return NotFound();
-            }
+            if (id != product.Id) return NotFound();
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(product);
+
+            try
             {
-                try
-                {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProductExists(product.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _productServices.UpdateAsync(product);
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
-        }
-
-        // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                ModelState.AddModelError(string.Empty, $"Update failed: {ex.Message}");
+                return View(product);
             }
+        }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (product == null)
+  
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
             {
-                return NotFound();
+                await _productServices.DeleteAsync(id);
+                return RedirectToAction(nameof(Index));
             }
-
-            return View(product);
-        }
-
-        // POST: Products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var product = await _context.Products.FindAsync(id);
-            if (product != null)
+            catch (Exception ex)
             {
-                _context.Products.Remove(product);
+                return View("Error", ex.Message);
             }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        public IActionResult BarcodeSearch()
         {
-            return _context.Products.Any(e => e.Id == id);
+            return View();
         }
 
-        public string GenerateBarcode(string content = "marwan mohamed", string outputDir = "D:\\New folder")
+        [HttpPost]
+        public async Task<JsonResult> BarcodeSearch(IFormFile barcode)
         {
-            var writer = new BarcodeWriterPixelData
+            try
             {
-                Format = BarcodeFormat.CODE_128,
-                Options = new ZXing.Common.EncodingOptions
-                {
-                    Height = 80,
-                    Width = 300,
-                    Margin = 2
-                }
-            };
+                if (barcode == null || barcode.Length == 0)
+                    return Json(new { error = "No file uploaded." });
 
-            var pixelData = writer.Write(content);
-            var filePath = Path.Combine(outputDir, $"{content}.png");
+                var id = _productServices.DecodeBarcode(barcode);
+                if (string.IsNullOrEmpty(id))
+                    return Json(new { error = "Could not decode barcode." });
 
-            using var bitmap = new Bitmap(pixelData.Width, pixelData.Height, PixelFormat.Format32bppRgb);
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                                             ImageLockMode.WriteOnly, PixelFormat.Format32bppRgb);
-            Marshal.Copy(pixelData.Pixels, 0, bitmapData.Scan0, pixelData.Pixels.Length);
-            bitmap.UnlockBits(bitmapData);
-            bitmap.Save(filePath, ImageFormat.Png);
+                var result = await _productServices.GetByIdAsync(Convert.ToInt32(id));
+                if (result == null)
+                    return Json(new { error = "Product not found." });
 
-            return filePath;
+                return Json(new { result });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { error = ex.Message });
+            }
         }
-        public static string DecodeBarcode(IFormFile file)
-        {
-            using var stream = file.OpenReadStream();
-            using var bitmap = new Bitmap(stream);
-            var reader = new BarcodeReader<SKBitmap>();
-
-            var result = reader.Decode(bitmap);
-            return result?.Text ?? "No barcode detected.";
-        }
-
-
-
     }
 }
