@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BarCode.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250702111722_AddProductsTable")]
+    [Migration("20250703063124_AddProductsTable")]
     partial class AddProductsTable
     {
         /// <inheritdoc />
@@ -34,11 +34,9 @@ namespace BarCode.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Barcode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BarcodeImagePath")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
