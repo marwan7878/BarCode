@@ -78,7 +78,11 @@
 <script>
     function showImageModal(imagePath) {
         const modalImage = document.getElementById('barcodeModalImage');
-        modalImage.src = "~"+imagePath;
+        modalImage.src = imagePath;
+
+        const downloadLink = document.getElementById('downloadBarcodeBtn');
+        downloadLink.href = imagePath;
+
         const modal = new bootstrap.Modal(document.getElementById('barcodeModal'));
         modal.show();
     }

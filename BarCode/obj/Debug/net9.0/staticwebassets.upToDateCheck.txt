@@ -6,7 +6,11 @@ wwwroot\barcodes\14.png
 wwwroot\barcodes\15.png
 wwwroot\barcodes\16.png
 wwwroot\barcodes\17.png
+wwwroot\barcodes\18.png
+wwwroot\barcodes\19.png
 wwwroot\barcodes\24.png
+wwwroot\barcodes\27.png
+wwwroot\barcodes\28.png
 wwwroot\barcodes\3.png
 wwwroot\barcodes\4.png
 wwwroot\barcodes\5.png
