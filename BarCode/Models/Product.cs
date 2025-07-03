@@ -8,11 +8,10 @@ namespace BarCode.Models
 
         [Required]
         public string Name { get; set; }
+        
+        public string? Barcode { get; set; }
 
-        [Required]
-        public string Barcode { get; set; }
-
-        public string BarcodeImagePath { get; set; }
+        public string? BarcodeImagePath { get; set; }
 
         public int Quantity { get; set; }
 
