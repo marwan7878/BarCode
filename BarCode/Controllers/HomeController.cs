@@ -1,6 +1,6 @@
-using System.Diagnostics;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using BarCode.Models;
+using System.Diagnostics;
 
 namespace BarCode.Controllers
 {

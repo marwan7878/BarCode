@@ -1,5 +1,5 @@
-﻿using BarCode.Models;
-using BarCode.Services.Interfaces;
+﻿using Application.Interfaces;
+using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
@@ -10,10 +10,12 @@ namespace BarCode.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductServices _productServices;
+        private readonly IWebHostEnvironment _env;
 
-        public ProductsController(IProductServices productServices)
+        public ProductsController(IProductServices productServices, IWebHostEnvironment env)
         {
             _productServices = productServices;
+            _env = env;
         }
 
         public async Task<IActionResult> Index()
@@ -61,7 +63,7 @@ namespace BarCode.Controllers
 
             try
             {
-                await _productServices.AddAsync(product);
+                await _productServices.AddAsync(product,_env.WebRootPath);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
