@@ -50,22 +50,6 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "BarCode.Slim": {
-              "target": "Package",
-              "version": "[2025.6.7, )"
-            },
-            "BarCoder": {
-              "target": "Package",
-              "version": "[1.6.0, )"
-            },
-            "BarcodeLib": {
-              "target": "Package",
-              "version": "[3.1.5, )"
-            },
-            "IronSoftware.ReaderInternals.Windows": {
-              "target": "Package",
-              "version": "[2025.6.34974, )"
-            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.6, )"
@@ -94,9 +78,9 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
-            "SkiaSharp": {
+            "SixLabors.ImageSharp": {
               "target": "Package",
-              "version": "[3.119.0, )"
+              "version": "[2.1.10, )"
             },
             "System.Drawing.Common": {
               "target": "Package",
@@ -105,6 +89,10 @@
             "ZXing.Net": {
               "target": "Package",
               "version": "[0.16.10, )"
+            },
+            "ZXing.Net.Bindings.ImageSharp.V2": {
+              "target": "Package",
+              "version": "[0.16.17, )"
             }
           },
           "imports": [

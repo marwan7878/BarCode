@@ -1,9 +1,7 @@
 ﻿using BarCode.Models;
 using BarCode.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using SkiaSharp;
 using System.Linq.Expressions;
-using static Grpc.Core.Metadata;
 
 
 namespace BarCode.Services

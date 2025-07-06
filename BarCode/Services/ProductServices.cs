@@ -1,6 +1,6 @@
 ﻿using BarCode.Models;
 using BarCode.Services.Interfaces;
-using IronBarCode;
+using SixLabors.ImageSharp;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
@@ -43,7 +43,7 @@ namespace BarCode.Services
             var filePath = Path.Combine(_env.WebRootPath + "\\" + outputDir, $"{content}.png");
 
             using var bitmap = new Bitmap(pixelData.Width, pixelData.Height, PixelFormat.Format32bppRgb);
-            var bitmapData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+            var bitmapData = bitmap.LockBits(new System.Drawing.Rectangle(0, 0, bitmap.Width, bitmap.Height),
                                              ImageLockMode.WriteOnly, PixelFormat.Format32bppRgb);
             Marshal.Copy(pixelData.Pixels, 0, bitmapData.Scan0, pixelData.Pixels.Length);
             bitmap.UnlockBits(bitmapData);
@@ -55,16 +55,6 @@ namespace BarCode.Services
         {
             var appointment = await _productRepo.GetByIdAsync(a => a.Id == id);
             return appointment;
-        }
-        public string DecodeBarcode(IFormFile file)
-        {
-            using var stream = file.OpenReadStream();
-
-            // Read barcode from stream
-            var results = BarcodeReader.Read(stream);
-
-            // Return the first decoded value, if any
-            return results.Any() ? results.First().Text : "";
         }
         public async Task<IEnumerable<Product>> GetAllAsync()
         {
@@ -84,7 +74,6 @@ namespace BarCode.Services
             _productRepo.Update(existingProduct);
             await _productRepo.SaveChangesAsync();
         }
-
         public async Task DeleteAsync(int id)
         {
             var product = await _productRepo.GetByIdAsync(id);
