@@ -7,10 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BarCode.Slim" Version="2025.6.7" />
-    <PackageReference Include="BarcodeLib" Version="3.1.5" />
-    <PackageReference Include="BarCoder" Version="1.6.0" />
-    <PackageReference Include="IronSoftware.ReaderInternals.Windows" Version="2025.6.34974" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
       <PrivateAssets>all</PrivateAssets>
@@ -23,9 +19,10 @@
     </PackageReference>
     <PackageReference Include="Microsoft.SqlServer.Server" Version="1.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
-    <PackageReference Include="SkiaSharp" Version="3.119.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="2.1.10" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.6" />
     <PackageReference Include="ZXing.Net" Version="0.16.10" />
+    <PackageReference Include="ZXing.Net.Bindings.ImageSharp.V2" Version="0.16.17" />
   </ItemGroup>
 
 </Project>

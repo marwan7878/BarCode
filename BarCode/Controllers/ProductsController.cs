@@ -1,6 +1,9 @@
 ﻿using BarCode.Models;
 using BarCode.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.PixelFormats;
+
 
 namespace BarCode.Controllers
 {
@@ -105,7 +108,7 @@ namespace BarCode.Controllers
             }
         }
 
-  
+
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -133,7 +136,7 @@ namespace BarCode.Controllers
                 if (barcode == null || barcode.Length == 0)
                     return Json(new { error = "No file uploaded." });
 
-                var id = _productServices.DecodeBarcode(barcode);
+                var id = DecodeBarcode(barcode);
                 if (string.IsNullOrEmpty(id))
                     return Json(new { error = "Could not decode barcode." });
 
@@ -147,6 +150,47 @@ namespace BarCode.Controllers
             {
                 return Json(new { error = ex.Message });
             }
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> UpdateQuantity(int id, int quantity)
+        {
+            try
+            {
+                var product = await _productServices.GetByIdAsync(id);
+                if (product != null)
+                {
+                    product.Quantity = quantity;
+                    await _productServices.UpdateAsync(product);
+                }
+                return Json(true);
+            }
+            catch (Exception ex)
+            {
+                return Json(false);
+            }
+        }
+        [HttpPost]
+        public string DecodeBarcode(IFormFile image)
+        {
+
+            using var stream = image.OpenReadStream();
+            using var img = Image.Load<Rgba32>(stream);
+
+            // Use ZXing.ImageSharp BarcodeReader with ImageSharp.V2 binding
+            var reader = new ZXing.ImageSharp.BarcodeReader<Rgba32>
+            {
+                AutoRotate = true,
+                TryInverted = true,
+                Options = new ZXing.Common.DecodingOptions
+                {
+                    TryHarder = true
+                }
+            };
+
+            var result = reader.Decode(img);
+            return result.ToString();
+
         }
     }
 }
