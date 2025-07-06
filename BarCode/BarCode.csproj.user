@@ -14,7 +14,7 @@
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
     <View_SelectedScaffolderID>RazorViewEmptyScaffolder</View_SelectedScaffolderID>
     <View_SelectedScaffolderCategoryPath>root/Common/MVC/View</View_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>C:\Users\hp\source\repos\BarCode\BarCode\Properties\PublishProfiles\site30373-WebDeploy1.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>C:\Users\hp\source\repos\BarCode\BarCode\Properties\PublishProfiles\site30373-WebDeploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
