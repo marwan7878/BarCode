@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hp\\source\\repos\\BarCode\\Infrastructure\\Infrastructure.csproj": {}
+    "D:\\FougeraClub\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hp\\source\\repos\\BarCode\\Application\\Application.csproj": {
+    "D:\\FougeraClub\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\source\\repos\\BarCode\\Application\\Application.csproj",
+        "projectUniqueName": "D:\\FougeraClub\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\hp\\source\\repos\\BarCode\\Application\\Application.csproj",
+        "projectPath": "D:\\FougeraClub\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\source\\repos\\BarCode\\Application\\obj\\",
+        "outputPath": "D:\\FougeraClub\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\hp\\source\\repos\\BarCode\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\hp\\source\\repos\\BarCode\\Domain\\Domain.csproj"
+              "D:\\FougeraClub\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\FougeraClub\\Domain\\Domain.csproj"
               }
             }
           }
@@ -73,14 +73,14 @@
         }
       }
     },
-    "C:\\Users\\hp\\source\\repos\\BarCode\\Domain\\Domain.csproj": {
+    "D:\\FougeraClub\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\source\\repos\\BarCode\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\FougeraClub\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\hp\\source\\repos\\BarCode\\Domain\\Domain.csproj",
+        "projectPath": "D:\\FougeraClub\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\source\\repos\\BarCode\\Domain\\obj\\",
+        "outputPath": "D:\\FougeraClub\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -138,14 +138,14 @@
         }
       }
     },
-    "C:\\Users\\hp\\source\\repos\\BarCode\\Infrastructure\\Infrastructure.csproj": {
+    "D:\\FougeraClub\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hp\\source\\repos\\BarCode\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "D:\\FougeraClub\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\hp\\source\\repos\\BarCode\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "D:\\FougeraClub\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hp\\source\\repos\\BarCode\\Infrastructure\\obj\\",
+        "outputPath": "D:\\FougeraClub\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -166,11 +166,11 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\hp\\source\\repos\\BarCode\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\hp\\source\\repos\\BarCode\\Application\\Application.csproj"
+              "D:\\FougeraClub\\Application\\Application.csproj": {
+                "projectPath": "D:\\FougeraClub\\Application\\Application.csproj"
               },
-              "C:\\Users\\hp\\source\\repos\\BarCode\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\hp\\source\\repos\\BarCode\\Domain\\Domain.csproj"
+              "D:\\FougeraClub\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\FougeraClub\\Domain\\Domain.csproj"
               }
             }
           }
@@ -191,6 +191,18 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[15.0.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[9.0.6, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.6, )"
@@ -210,22 +222,6 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.6, )"
-            },
-            "SixLabors.ImageSharp": {
-              "target": "Package",
-              "version": "[3.1.10, )"
-            },
-            "System.Drawing.Common": {
-              "target": "Package",
-              "version": "[9.0.6, )"
-            },
-            "ZXing.Net": {
-              "target": "Package",
-              "version": "[0.16.10, )"
-            },
-            "ZXing.Net.Bindings.ImageSharp.V2": {
-              "target": "Package",
-              "version": "[0.16.17, )"
             }
           },
           "imports": [
